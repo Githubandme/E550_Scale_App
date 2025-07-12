@@ -1,2 +1,104 @@
-# E550_Scale_App
-E550_Scale_App（E550电子秤APP，物流入库APP）
+# E550电子秤重量显示与上传系统
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+## 项目简介
+
+E550电子秤重量显示与上传系统是一个连接CH340电子秤的桌面应用程序，可实时显示重量数据并上传至远程服务器。该应用程序支持自动检测和连接电子秤设备，提供稳定性指示、数据上传和历史记录查看等功能。
+
+## 主要功能
+
+- 自动连接并识别CH340串口电子秤
+- 实时显示重量数据
+- 重量稳定性指示
+- 记录包裹尺寸信息（长、宽、高）
+- 将重量和尺寸数据上传到指定服务器
+- 显示上传历史记录
+- 支持设置管理和参数配置
+
+## 安装要求
+
+- Windows操作系统
+- Python 3.6+
+- 以下Python库:
+  - pyserial==3.5
+  - requests==2.31.0
+  - ttkbootstrap==1.10.1
+
+## 安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+## 使用说明
+
+1. 连接电子秤到计算机USB端口
+2. 运行程序
+3. 程序将自动尝试连接电子秤
+4. 将包裹放置在电子秤上，等待重量稳定（指示灯变为绿色）
+5. 输入扫描单号和可选的包裹尺寸
+6. 点击"上传重量"或按回车键上传数据
+
+## 配置说明
+
+首次使用时，需要在设置中配置以下参数：
+
+1. 设备编号：电子秤的唯一标识
+2. API域名和端口：远程服务器地址
+3. 用户ID和安全密钥：API访问凭证
+
+> **注意**：程序初始包含的配置信息仅为示例，需要用户自行替换为有效的配置。
+
+## 使用PyInstaller打包
+
+要将程序打包成单个可执行文件，可以使用PyInstaller。以下是打包步骤：
+
+1. 安装PyInstaller
+```bash
+pip install pyinstaller
+```
+
+2. 进入项目目录
+```bash
+cd 程序路径\E550_Electronic_scales
+```
+
+3. 使用PyInstaller创建单文件
+```bash
+pyinstaller --onefile --windowed --icon=weight-scale.ico --add-data "weight-scale.ico;." "E550串口测试V63.py"
+```
+
+4. 打包完成后，可执行文件将位于`dist`文件夹中
+
+## 故障排除
+
+- **无法连接电子秤**：检查USB连接，确保CH340驱动已正确安装
+- **重量显示不稳定**：确保电子秤放置在平稳表面，避免振动
+- **上传数据失败**：检查网络连接，确认API配置正确
+- **串口无法识别**：尝试在设置中手动选择正确的COM端口
+
+## 隐私与安全
+
+- 本应用程序不会收集或存储用户个人数据
+- 敏感信息（如API密钥）存储在本地配置文件中
+- 建议定期更改设置密码以增强安全性
+
+## 许可
+
+本项目采用 GNU General Public License v3.0 (GPL-3.0) 许可证
+
+Copyright (C) 2023-2025
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
